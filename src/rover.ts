@@ -10,16 +10,34 @@ let vehicle: Rover = {
 };
 
 function initialisePlateau(plateauDimensions: string) {
-  console.log(`start plateau initialisation with input: ${plateauDimensions}`)
+  console.log(
+    `start plateau initialisation with main input: ${plateauDimensions}`
+  );
 
-  const [xAxisLength, yAxisLength] = plateauDimensions.split(" ")
+  if (!plateauDimensions)
+    throw new Error(
+      "Plateau cannot be initialised due to an error in the dimensions"
+    );
+
+  const [xAxisLength, yAxisLength] = plateauDimensions.split(" ");
+
+  console.log(
+    `start plateau initialisation with input: ${plateau.x} ${plateau.y}`
+  );
+
+  if (isNaN(parseInt(xAxisLength)) || isNaN(parseInt(yAxisLength)))
+    throw new Error(
+      "Plateau cannot be initialised due to an error in the dimensions"
+    );
+
   plateau = {
     x: parseInt(xAxisLength),
     y: parseInt(yAxisLength),
   };
 
-  console.log(`complete plateau initialisation with input: ${plateau.x} ${plateau.y}`)
-
+  console.log(
+    `completed plateau initialisation with input: ${plateau.x} ${plateau.y}`
+  );
 }
 
 function isOrientation(input: string): input is Orientation {
@@ -27,45 +45,64 @@ function isOrientation(input: string): input is Orientation {
 }
 
 function initialiseVehicle(vehiclePositionAndOrientation: string): Rover {
+  console.log(
+    `start vehicle initialisation with input: ${vehiclePositionAndOrientation}`
+  );
 
-  console.log(`start vehicle initialisation with input: ${vehiclePositionAndOrientation}`)
-
-  if(!vehiclePositionAndOrientation) {
+  if (!vehiclePositionAndOrientation) {
     throw new Error("Vehicle position or orientation is invalid");
   }
 
-  const [positionX, positionY, vehicleOrientation] = vehiclePositionAndOrientation.split(" ")
+  const [positionX, positionY, vehicleOrientation] =
+    vehiclePositionAndOrientation.split(" ");
 
-  if(!positionX || parseInt(positionX)<0 || parseInt(positionX)>plateau.x) {
-    throw new Error("Vehicle position is incorrect on the x-axis");
+    if (isNaN(parseInt(positionX)) || isNaN(parseInt(positionY)))
+    throw new Error(
+      "Vehicle coordinate(s) invalid"
+    );
+
+  if (
+    !positionX ||
+    parseInt(positionX) < 0 ||
+    parseInt(positionX) > plateau.x
+  ) {
+    throw new Error("Cannot land outside of the plateau");
   }
 
-  if(!positionY || parseInt(positionY)<0 || parseInt(positionY)>plateau.y) {
-    throw new Error("Vehicle position is incorrect on the y-axis");
+  if (
+    !positionY ||
+    parseInt(positionY) < 0 ||
+    parseInt(positionY) > plateau.y
+  ) {
+    throw new Error("Cannot land outside of the plateau");
   }
 
-  if(!isOrientation(vehicleOrientation)) {
-    throw new Error("Vehicle orientation is invalid");
+  if (!isOrientation(vehicleOrientation)) {
+    throw new Error("Vehicle orientation is invalid " + vehicleOrientation);
   }
 
   //initialise the position of the vehicle
   vehicle = {
     x: parseInt(positionX),
     y: parseInt(positionY),
-    orientation: vehicleOrientation
+    orientation: vehicleOrientation,
   };
 
-  console.log(`complete vehicle initialisation with input: ${vehicle.x} ${vehicle.y} ${vehicle.orientation}`)
+  console.log(
+    `completed vehicle initialisation with input: ${vehicle.x} ${vehicle.y} ${vehicle.orientation}`
+  );
 
   return vehicle;
 }
 
 function executeInstructions(instructions: string): string {
   const instructionArray = instructions.split("");
-  //console.log(`instructions: ${instructionArray}`)
+  console.log(`instructions: ${instructionArray}`);
   instructionArray.forEach((i) => executeOneInstruction(i));
-  const vehicleState = `${vehicle.x.toString()} ${vehicle.y.toString()} ${vehicle.orientation}`
-  //console.log(`vehicleState: ${vehicleState}`)
+  const vehicleState = `${vehicle.x.toString()} ${vehicle.y.toString()} ${
+    vehicle.orientation
+  }`;
+  console.log(`vehicleState: ${vehicleState}`);
 
   return vehicleState;
 }
@@ -77,61 +114,85 @@ function isInstruction(input: string): input is Instruction {
 
 function executeOneInstruction(instruction: string): void {
   if (instruction && !isInstruction(instruction)) {
-    throw new Error("Instruction is invalid");
+    throw new Error("Vehicle instruction is invalid");
   }
 
   //THE NAVIGATION LOGIC GOES IN HERE
-  switch(vehicle.orientation) {
-    case 'N':
+  switch (vehicle.orientation) {
+    case "N":
       switch (instruction) {
-        case 'L':
-          vehicle.orientation = 'W';
+        case "L":
+          vehicle.orientation = "W";
           break;
-        case 'M':
-          (vehicle.y<plateau.y)?vehicle.y++:new Error("Reached the north end side of the plateau")
+        case "M":
+          if (vehicle.y < plateau.y) {
+            vehicle.y++;
+          } else {
+            throw new Error("Reached the edge of the plateau");
+          }
           break;
-        case 'R':
-          vehicle.orientation = 'E';
+        case "R":
+          vehicle.orientation = "E";
           break;
+        default:
+          throw new Error("Vehicle instruction is invalid");
       }
       break;
-    case 'S':
+    case "S":
       switch (instruction) {
-        case 'L':
-          vehicle.orientation = 'E';
+        case "L":
+          vehicle.orientation = "E";
           break;
-        case 'M':
-          (vehicle.y>0)?vehicle.y--:new Error("Reached the south end side of the plateau");
+        case "M":
+          if (vehicle.y > 0) {
+            vehicle.y--;
+          } else {
+            throw new Error("Reached the edge of the plateau");
+          }
           break;
-        case 'R':
-          vehicle.orientation = 'W';
+        case "R":
+          vehicle.orientation = "W";
           break;
+        default:
+          throw new Error("Vehicle instruction is invalid");
       }
       break;
-    case 'W':
+    case "W":
       switch (instruction) {
-        case 'L':
-          vehicle.orientation = 'S';
+        case "L":
+          vehicle.orientation = "S";
           break;
-        case 'M':
-          (vehicle.x>0)?vehicle.x--:new Error("Reached the west end side of the plateau");
+        case "M":
+          if (vehicle.x > 0) {
+            vehicle.x--;
+          } else {
+            throw new Error("Reached the edge of the plateau");
+          }
           break;
-        case 'R':
-          vehicle.orientation = 'N';
+        case "R":
+          vehicle.orientation = "N";
           break;
+        default:
+          throw new Error("Vehicle instruction is invalid");
       }
       break;
-    case 'E':
+    case "E":
       switch (instruction) {
-        case 'L':
-          vehicle.orientation = 'N';
+        case "L":
+          vehicle.orientation = "N";
           break;
-        case 'M':
-          (vehicle.x<plateau.x)?vehicle.x++:new Error("Reached the east end side of the plateau");
+        case "M":
+          if (vehicle.x < plateau.x) {
+            vehicle.x++;
+          } else {
+            throw new Error("Reached the edge of the plateau");
+          }
           break;
-        case 'R':
-          vehicle.orientation = 'S';
+        case "R":
+          vehicle.orientation = "S";
           break;
+        default:
+          throw new Error("Vehicle instruction is invalid");
       }
       break;
   }
