@@ -1,4 +1,4 @@
-# mars-rover-kata
+# 👾 🚀 mars-rover-kata 👾 🚀
 
 ## Problem:
 Help Mars Rovers navigate the Plateau so they can use their special cameras 📷 and robot arms 🌏🦾 to collect samples back to Planet Earth. Create a program which implements the rules for the Mars Rover.
@@ -39,3 +39,6 @@ Help Mars Rovers navigate the Plateau so they can use their special cameras 📷
 ## Future thoughts:
 - [] Receive input via console to make it more dynamic and user friendly 🙆🏻‍♀️
 - [] Prevents rovers from colliding with each other which can be expensive 🫰💰
+
+![Oil painting of Mars Rovers collecting samples to send back to Planet Earth](/src/vehicles/rovers.png)
+[Designed with DALL-E #dalle](https://labs.openai.com/s/c021LqU2k7YDVSDxlfrbnshA)
