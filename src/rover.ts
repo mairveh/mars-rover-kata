@@ -22,6 +22,7 @@ function initialisePlateau(plateauDimensions: string) {
       "Plateau cannot be initialised due to an error in the dimensions"
     );
 
+  //initialise the plateau with given dimensions
   plateau = {
     x: parseInt(xAxisLength),
     y: parseInt(yAxisLength),
@@ -95,7 +96,7 @@ function executeOneInstruction(instruction: string): void {
     throw new Error("Vehicle instruction is invalid");
   }
 
-  //THE NAVIGATION LOGIC GOES IN HERE
+  //navigation logic is handled for each valid move otherwise a relevant error message is displayed
   switch (vehicle.orientation) {
     case "N":
       switch (instruction) {
