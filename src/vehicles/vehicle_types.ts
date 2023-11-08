@@ -1,5 +1,5 @@
-type Rover = { 
-                x: number; 
-                y: number; 
-                orientation: string;
-            };
+type Rover = {
+  x: number;
+  y: number;
+  orientation: string;
+};
