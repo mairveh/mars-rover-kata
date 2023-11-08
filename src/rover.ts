@@ -10,20 +10,12 @@ let vehicle: Rover = {
 };
 
 function initialisePlateau(plateauDimensions: string) {
-  console.log(
-    `start plateau initialisation with main input: ${plateauDimensions}`
-  );
-
   if (!plateauDimensions)
     throw new Error(
       "Plateau cannot be initialised due to an error in the dimensions"
     );
 
   const [xAxisLength, yAxisLength] = plateauDimensions.split(" ");
-
-  console.log(
-    `start plateau initialisation with input: ${plateau.x} ${plateau.y}`
-  );
 
   if (isNaN(parseInt(xAxisLength)) || isNaN(parseInt(yAxisLength)))
     throw new Error(
@@ -35,9 +27,6 @@ function initialisePlateau(plateauDimensions: string) {
     y: parseInt(yAxisLength),
   };
 
-  console.log(
-    `completed plateau initialisation with input: ${plateau.x} ${plateau.y}`
-  );
 }
 
 function isOrientation(input: string): input is Orientation {
@@ -45,10 +34,6 @@ function isOrientation(input: string): input is Orientation {
 }
 
 function initialiseVehicle(vehiclePositionAndOrientation: string): Rover {
-  console.log(
-    `start vehicle initialisation with input: ${vehiclePositionAndOrientation}`
-  );
-
   if (!vehiclePositionAndOrientation) {
     throw new Error("Vehicle position or orientation is invalid");
   }
@@ -88,27 +73,20 @@ function initialiseVehicle(vehiclePositionAndOrientation: string): Rover {
     orientation: vehicleOrientation,
   };
 
-  console.log(
-    `completed vehicle initialisation with input: ${vehicle.x} ${vehicle.y} ${vehicle.orientation}`
-  );
-
   return vehicle;
 }
 
 function executeInstructions(instructions: string): string {
   const instructionArray = instructions.split("");
-  console.log(`instructions: ${instructionArray}`);
   instructionArray.forEach((i) => executeOneInstruction(i));
   const vehicleState = `${vehicle.x.toString()} ${vehicle.y.toString()} ${
     vehicle.orientation
   }`;
-  console.log(`vehicleState: ${vehicleState}`);
 
   return vehicleState;
 }
 
 function isInstruction(input: string): input is Instruction {
-  //console.log(`instruction: ${input}`);
   return ["L", "R", "M"].includes(input);
 }
 
@@ -203,7 +181,6 @@ function execute(input: string): string {
     throw new Error("Input is invalid");
   }
   const inputArray = input.split("\n");
-  //console.log(`inputArray: ${inputArray}`);
   let finalPosition = "";
   switch (inputArray.length) {
     case 3:
