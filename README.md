@@ -27,18 +27,18 @@ Help Mars Rovers navigate the Plateau so they can use their special cameras 📷
 1. The solution benefits from typescript type guards for input validation.
 2. Test-Driven Development (TDD) approach is used to test-drive the solution as it's built.
 3. Production-quality code is produced covering below aspects:
-- [x]is well designed. can scale further for different vehicles and pletaus due to 
+- &#9745; is well designed. can scale further for different vehicles and pletaus due to 
     - separation of UI Elements and Backend code
     - folder structure
     - generic naming convention for variables and files, i.e. vehicle vs rover
-- [x]is clean 
-- [x]has good unit test coverage including edge case scenarios with type guarding
-- [x]is readable with clear comments.
-- [x]is split into a scalable folder/file structure to help with scaling it further, see Future thoughts below.
+- &#9745; is clean 
+- &#9745; has good unit test coverage including edge case scenarios with type guarding
+- &#9745; is readable with clear comments.
+- &#9745; is split into a scalable folder/file structure to help with scaling it further, see Future thoughts below.
 
 ## Future thoughts:
-- [] Receive input via console to make it more dynamic and user friendly 🙆🏻‍♀️
-- [] Prevents rovers from colliding with each other which can be expensive 🫰💰
+- &#9744; Receive input via console to make it more dynamic and user friendly 🙆🏻‍♀️
+- &#9744; Prevents rovers from colliding with each other which can be expensive 🫰💰
 
 ![Oil painting of Mars Rovers collecting samples to send back to Planet Earth](/src/vehicles/rovers.png)
 [Designed with DALL-E #dalle](https://labs.openai.com/s/c021LqU2k7YDVSDxlfrbnshA)
