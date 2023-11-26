@@ -177,7 +177,7 @@ function executeOneInstruction(instruction: string): void {
   }
 }
 
-function execute(input: string): string {
+export function execute(input: string): string {
   if (input === undefined || input === null || input.trim() === "") {
     throw new Error("Input is invalid");
   }
@@ -199,5 +199,3 @@ function execute(input: string): string {
 
   return finalPosition;
 }
-
-module.exports = execute;
