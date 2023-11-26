@@ -115,7 +115,7 @@ describe("test Mars Rover wall clashes 💥💥💥", () => {
   });
 });
 
-describe("test Mars Rover navigation on a square 5x5 grid ◼︎", () => {
+describe("test Mars Rover navigation works on a variety of grid sizes", () => {
   it("test navigation for a rover on 5x5 grid", () => {
     const input = "5 5\\1 2 N\\LMLMLMLMM";
     const expectedResult = "1 3 N";
