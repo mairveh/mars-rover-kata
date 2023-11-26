@@ -181,7 +181,7 @@ export function execute(input: string): string {
   if (input === undefined || input === null || input.trim() === "") {
     throw new Error("Input is invalid");
   }
-  const inputArray = input.split("\n");
+  const inputArray = input.split("\\");
   let finalPosition = "";
   switch (inputArray.length) {
     case 3:
